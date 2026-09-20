@@ -1,0 +1,109 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate QR for Aaryas Hotel</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Special+Elite&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background: #14100C;
+            font-family: 'Special Elite', monospace;
+            color: #F2EFE4;
+        }
+        .navbar { background: #1B2A22 !important; }
+        .navbar a { font-family: 'Caveat', cursive; font-size: 22px !important; color: #E8C468 !important; }
+
+        .qr-frame {
+            background: linear-gradient(155deg, #6B4A31, #4E3521);
+            padding: 14px;
+            max-width: 460px;
+            margin: 60px auto;
+            box-shadow: 0 24px 50px -18px rgba(0,0,0,0.7);
+        }
+        .qr-board {
+            background: #23342A;
+            padding: 34px 30px;
+            border-radius: 2px;
+        }
+        .qr-board h1, .qr-board .title {
+            font-family: 'Caveat', cursive;
+            font-weight: 700;
+            font-size: 34px;
+            color: #F2EFE4;
+            text-align: center;
+            transform: rotate(-1deg);
+            margin-bottom: 4px;
+        }
+        .qr-board .subtitle {
+            font-family: 'Caveat', cursive;
+            font-size: 18px;
+            color: #E8C468;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .qr-board label {
+            font-family: 'Caveat', cursive;
+            font-size: 18px;
+            color: #C9C6B8;
+            margin-bottom: 4px;
+        }
+        .qr-board .form-control {
+            background: rgba(255,255,255,0.05);
+            border: 1.5px dashed rgba(242,239,228,0.35);
+            color: #F2EFE4;
+            border-radius: 2px;
+        }
+        .qr-board .form-control:focus {
+            background: rgba(255,255,255,0.08);
+            border-color: #E8C468;
+            box-shadow: none;
+            color: #F2EFE4;
+        }
+        .qr-board .form-control::placeholder { color: #6E695A; }
+        .qr-board .btn-primary {
+            width: 100%;
+            background: transparent;
+            border: 1.5px solid #E8C468;
+            color: #E8C468;
+            font-family: 'Special Elite', monospace;
+            font-size: 13px;
+            letter-spacing: 0.03em;
+            padding: 12px;
+            margin-top: 8px;
+        }
+        .qr-board .btn-primary:hover {
+            background: #E8C468;
+            color: #1B2A22;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a href="">Generate QR Code</a>
+        </div>
+    </nav>
+
+    <div class="qr-frame">
+        <div class="qr-board">
+            <div class="title">Scan. Browse. Order.</div>
+            <div class="subtitle">chalk one up for see the menu</div>
+
+            <form action="{% url 'generate_qr_code' %}" method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Generate QR </button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
