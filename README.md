@@ -1,4 +1,4 @@
-@'
+
 # QR Scanner
 
 A Django web app to generate QR codes for restaurant menus.
@@ -25,5 +25,5 @@ Open http://127.0.0.1:8000/ in your browser.
 
 ## Author
 KOWSALYAVELU
-'@ | Out-File -Encoding utf8 README.md
+
 
