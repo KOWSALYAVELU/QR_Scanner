@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from .forms import QRCodeForm
 import qrcode
-import os
-from django.conf import settings
+import base64                                  
+from io import BytesIO
+
 
 def generate_qr_code(request):
     if request.method == "POST":
@@ -14,12 +15,13 @@ def generate_qr_code(request):
             #Genrate QR code 
             qr = qrcode.make(url)
             file_name= restaurant_name.replace(" ", "_").lower() + "_menu.png"
-            file_path = os.path.join(settings.MEDIA_ROOT, file_name)
-            # Save the QR code image to the media folder
-            qr.save(file_path)
 
+            buffer = BytesIO()
+            qr.save(buffer, format="PNG")
+            qr_base64 = base64.b64encode(buffer.getvalue()).decode("utf-8")
+        
             #Image URL  Create
-            qr_url = settings.MEDIA_URL + file_name            
+            qr_url = "data:image/png;base64," + qr_base64           
             context = {
                  'restaurant_name': restaurant_name,
                  'qr_url': qr_url,
